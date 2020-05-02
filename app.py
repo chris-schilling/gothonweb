@@ -1,8 +1,14 @@
+import os
 from flask import Flask
 from flask import render_template
 from flask import request
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'docs'
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route("/hello", methods=['POST', 'GET'])
 def index():
@@ -12,6 +18,11 @@ def index():
         name = request.form['name']
         greet = request.form['greet']
         greeting = f"{greet}, {name}"
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #f = request.files['file']
+        #f.save(secure_filename(f.filename))
         return render_template("index.html", greeting=greeting)
     else:
         return render_template("hello_form.html")
