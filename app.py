@@ -4,7 +4,7 @@ from flask import render_template
 from flask import request
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = 'docs'
+UPLOAD_FOLDER = 'downloads'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 app = Flask(__name__)
@@ -21,8 +21,6 @@ def index():
         file = request.files['file']
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        #f = request.files['file']
-        #f.save(secure_filename(f.filename))
         return render_template("index.html", greeting=greeting)
     else:
         return render_template("hello_form.html")
