@@ -19,8 +19,9 @@ def index():
         greet = request.form['greet']
         greeting = f"{greet}, {name}"
         file = request.files['file']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        if file.filename != '':
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return render_template("index.html", greeting=greeting)
     else:
         return render_template("hello_form.html")
