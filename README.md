@@ -1,3 +1,3 @@
-Adding a simple README file. This will describe what the project is all about.
+# Gothons from Planet Parcel #25
 
-I'll try to create a webpage during this project to play a simple game.
+This is my final project for the Learn Python the Hard Way course. It is a simple webgame that challenges the player to navigate a series of rooms so that they can avoid danger and escape a spaceship that has been invaded by aliens.
